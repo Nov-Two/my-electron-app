@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' blob: data:; script-src 'self'; style-src 'self' 'unsafe-inline';"
+    />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <title>Electron 视频播放器 - 播放列表版</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #111;
+        color: #eee;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+      #sidebar {
+        width: 300px;
+        background: #1b1b1b;
+        border-right: 1px solid #333;
+        overflow-y: auto;
+        padding: 10px;
+      }
+      #main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      video {
+        width: 90%;
+        margin: 20px;
+        background: black;
+        border-radius: 8px;
+        height: 60%;
+      }
+      button {
+        margin: 4px;
+        padding: 6px 12px;
+        border: none;
+        background: #333;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #555;
+      }
+      .video-item {
+        padding: 8px;
+        margin-bottom: 8px;
+        background: #222;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .video-item:hover {
+        background: #333;
+      }
+      .video-item.active {
+        background: #444;
+        border-left: 3px solid #09f;
+      }
+      .thumb {
+        width: 80px;
+        height: 45px;
+        margin-right: 8px;
+        background: #000;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      .title {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      #ai-panel {
+        margin-top: 10px;
+        padding: 10px;
+        background: #222;
+        color: #0f0;
+        border-radius: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="position: fixed; bottom: 0px">
+      <h1>Hello Electron!👋</h1>
+      <p id="info"></p>
+    </div>
+
+    <div id="sidebar">
+      <button id="open">📂 打开视频文件</button>
+      <div id="playlist"></div>
+    </div>
+
+    <div id="main">
+      <h2>Electron 视频播放器</h2>
+      <video id="player" controls></video>
+      <div>
+        <button id="playPause">播放 / 暂停</button>
+        <button id="aiAnalyze">AI 分析</button>
+        <button id="prev">上一个</button>
+        <button id="next">下一个</button>
+        <span id="speedLabel">1.0x</span>
+        <button id="slower">-</button>
+        <button id="faster">+</button>
+      </div>
+      <div id="ai-panel" class="hidden"></div>
+    </div>
+  </body>
+
+  <script src="./renderer.js"></script>
+</html>
