@@ -1,12 +1,14 @@
 {
   "name": "my-electron-app",
   "version": "1.0.0",
-  "description": "Hello World!",
+  "description": "Electron 视频分析应用",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node node_modules/electron/install.js"
+    "postinstall": "node node_modules/electron/install.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "Jane Doe",
   "license": "MIT",
@@ -28,7 +30,10 @@
     }
   },
   "build": {
-    "appId": "com.yourname.myapp",
+    "electronDownload": {
+      "mirror": "https://npmmirror.com/mirrors/electron/"
+    },
+    "appId": "com.MyElectronApp",
     "productName": "MyElectronApp",
     "directories": {
       "buildResources": "assets",
@@ -39,7 +44,11 @@
       "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
     ],
     "mac": {
-      "target": "dmg"
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities"
     },
     "win": {
       "target": "nsis"
@@ -50,8 +59,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "你的GitHub用户名",
-        "repo": "你的仓库名"
+        "owner": "Nov-Two",
+        "repo": "my-electron-app"
       }
     ]
   }
